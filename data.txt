@@ -3,3 +3,8 @@
   rows: 1
   cols: 1
   type: table
+- path: practice
+  name: practice
+  rows: 1
+  cols: 1
+  type: table
