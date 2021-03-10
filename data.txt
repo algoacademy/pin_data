@@ -23,3 +23,8 @@
   rows: 1
   cols: 1
   type: table
+- path: 617863.0
+  name: 617863.0
+  rows: 1
+  cols: 1
+  type: table
