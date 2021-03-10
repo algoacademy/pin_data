@@ -2,46 +2,4 @@
 "# This will be the code from the instructor
 library(shiny)
 df <- iris
-iris_species <- iris$Species
-a
-a
-a
-a
-
-a
-a
-a
-
-a
-a
-a
-
-a
-a
-a
-
-a
-a
-a
-
-a
-a
-
-a
-
-a
-a
-a
-
-a
-a
-a
-
-a
-a
-
-a
-a
-a
-
-a"
+iris_species <- iris$Species"
