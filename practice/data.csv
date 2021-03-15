@@ -1,4 +1,2 @@
 "text"
-"library(tidyverse)
-iris %>% select(Species) 
-"
+"library(tidytext)"
