@@ -63,3 +63,8 @@
   rows: 1
   cols: 1
   type: table
+- path: '7431'
+  name: '7431'
+  rows: 1
+  cols: 1
+  type: table
