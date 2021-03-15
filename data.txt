@@ -58,3 +58,8 @@
   rows: 1
   cols: 1
   type: table
+- path: '5898'
+  name: '5898'
+  rows: 1
+  cols: 1
+  type: table
