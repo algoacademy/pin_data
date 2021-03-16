@@ -1,5 +1,7 @@
 "text"
-"# This will be the code from the instructor
-library(shiny)
-df <- iris
-iris_species <- iris$Species"
+"df <- data.frame(nama = c(""arga"", ""lita"", ""wulan"", ""eca""),
+           score = c(70, 90, 85, 80),
+           usia = c(24, 25, 24, NA)
+           )
+
+df"
