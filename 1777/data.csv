@@ -1,7 +1,9 @@
 "text"
-"df <- data.frame(nama = c(""arga"", ""lita"", ""wulan"", ""eca""),
-           score = c(70, 90, 85, 80),
-           usia = c(24, 25, 24, NA)
-           )
+"head(df, 2) # default --> 6 teratas
+tail(df) # karena df hanya terdiri dari 4 baris
+dim(df)
+nrow(df)
 
-df"
+ncol(df)
+# equivalent
+length(df)"
