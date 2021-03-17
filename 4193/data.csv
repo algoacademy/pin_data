@@ -1,3 +1,5 @@
 "text"
 "library(tidyverse)
-library(tidytext)"
+library(tidytext)
+library(shiny)
+library(keras)"
