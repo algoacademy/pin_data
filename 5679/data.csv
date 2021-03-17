@@ -1,5 +1,12 @@
 "text"
-"retail[retail$Segment == ""Consumer"", c(""Order.Date"", ""Product.Name"")]
+"# bisa menggunakan operator include `%in%`
+retail[retail$Segment %in% c(""Consumer"", ""Corporate""), ]
 
-subset(retail, subset = retail$Segment == ""Consumer"", select = c(""Order.Date"", ""Product.Name""))
-"
+# equivalent
+retail[retail$Segment == ""Consumer"" | retail$Segment == ""Corporate"", ]
+head(retail)
+
+# baris-baris yang bukan termasuk Segment Consumer dan Corporate
+retail[!(retail$Segment %in% c(""Consumer"", ""Corporate"")), ]
+
+subset(retail, subset = !(retail$Segment %in% c(""Consumer"", ""Corporate"")))"
