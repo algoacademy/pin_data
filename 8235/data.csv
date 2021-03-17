@@ -1,10 +1,10 @@
 "text"
-"index pada data.frame di R
+"# Code untuk QnA
+index pada data.frame di R
 
 retail[ index baris, index kolom]
 
 data.frame memiliki
-
 
 - rownames
 - colnames
@@ -55,7 +55,10 @@ tipe_list <- as.character(tipe_list)
 
 # pilih index list yang bertipe numeric
 sample_list[ tipe_list == ""numeric""]
-```
 
+# menambahkan value baru
+sample_list$score <- c(50, sample_list$score, 60)
+
+```
 
 "
