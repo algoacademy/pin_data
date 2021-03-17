@@ -88,3 +88,8 @@
   rows: 1
   cols: 1
   type: table
+- path: '7975'
+  name: '7975'
+  rows: 1
+  cols: 1
+  type: table
