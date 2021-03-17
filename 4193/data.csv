@@ -1,4 +1,2 @@
 "text"
-"library(tidyverse)
-library(shiny)
-library(tidytext)"
+"library(tidyverse)"
