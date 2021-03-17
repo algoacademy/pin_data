@@ -1,5 +1,61 @@
 "text"
-"# This will be the code from the instructor
-library(shiny)
-df <- iris
-iris_species <- iris$Species"
+"index pada data.frame di R
+
+retail[ index baris, index kolom]
+
+data.frame memiliki
+
+
+- rownames
+- colnames
+
+```{r}
+retail[ ,  c(""Segment"", ""Ship.Date"")]
+
+colnames(retail)
+```
+
+```{r}
+rownames(retail)
+```
+
+menghapus 1 object di environment
+
+```{r}
+#rm(nama objek)
+rm(quiz1)
+```
+
+Subset data
+
+- Subset kolom = pilih nama yang mau dipilih atau yang mau dibuang
+
+- Subset baris = pilih baris ke berapa atau yang memenuhi kondisi kondisi tertentu
+
+Hanya ambil ship mode yang second class dan hanya ambil kolom order.id dan order.date
+
+```{r}
+retail[ retail$Ship.Mode == ""Second Class"", c(""Order.ID"", ""Order.Date"")]
+```
+
+```{r}
+subset(retail, 
+       subset = Ship.Mode == ""Second Class"", 
+       select = c(""Order.ID"", ""Order.Date""))
+```
+
+class(): cek tipe data
+
+```{r}
+# Cek tipe data setiap index list
+tipe_list <- lapply(sample_list, class)
+
+# Ubah hasilnya menjadi vektor agar bisa diberi operator logika
+tipe_list <- as.character(tipe_list)
+
+# pilih index list yang bertipe numeric
+sample_list[ tipe_list == ""numeric""]
+```
+
+
+"
