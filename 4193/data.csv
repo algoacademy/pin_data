@@ -2,5 +2,4 @@
 "library(tidyverse)
 
 data <- read.csv(""data.csv"")
-
-summary(data)"
+"
