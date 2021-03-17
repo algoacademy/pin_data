@@ -1,5 +1,5 @@
 "text"
-"# This will be the code from the instructor
-library(shiny)
-df <- iris
-iris_species <- iris$Species"
+"retail[retail$Segment == ""Consumer"", c(""Order.Date"", ""Product.Name"")]
+
+subset(retail, subset = retail$Segment == ""Consumer"", select = c(""Order.Date"", ""Product.Name""))
+"
