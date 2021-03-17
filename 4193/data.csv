@@ -1,2 +1,4 @@
 "text"
-"library(tidyverse)"
+"library(tidyverse)
+
+data <- read.csv(""data.csv"")"
