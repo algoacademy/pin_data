@@ -1,5 +1,13 @@
 "text"
-"# This will be the code from the instructor
-library(shiny)
-df <- iris
-iris_species <- iris$Species"
+"sort(): mengembalikan value yang sudah diurutkan
+order(): mengembalikan urutannya, bukan nilainya langsung
+
+```{r}
+temp <- xtabs(formula = Profit ~ Ship.Mode + Segment, data = retail )
+
+# diubah jadi data.frame
+df_temp <- as.data.frame(temp)
+
+# mengurutkan data berdasarkan frequency
+df_temp[ order(df_temp$Freq, decreasing = T), ]
+```"
