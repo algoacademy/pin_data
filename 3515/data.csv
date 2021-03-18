@@ -1,5 +1,8 @@
 "text"
-"# This will be the code from the instructor
-library(shiny)
-df <- iris
-iris_species <- iris$Species"
+"library(dplyr)
+
+retail %>% 
+  group_by(Segment, Ship.Mode) %>% 
+  summarise(avg_profit = mean(Profit),
+            sum_profit = sum(Profit)) %>% 
+  rename(jenis.pengiriman = Ship.Mode)"
