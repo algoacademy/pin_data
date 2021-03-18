@@ -123,3 +123,8 @@
   rows: 1
   cols: 1
   type: table
+- path: '6016'
+  name: '6016'
+  rows: 1
+  cols: 1
+  type: table
