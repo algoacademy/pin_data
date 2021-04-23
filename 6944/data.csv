@@ -1,5 +1,11 @@
 "text"
-"# This will be the code from the instructor
-library(shiny)
-df <- iris
-iris_species <- iris$Species"
+"plot1 <- workers_clean %>% 
+  ggplot(aes(as.factor(year), total_earnings_female, text = occupation)) + 
+  geom_boxplot(aes(group = year), outlier.color = ""white"")+
+  geom_jitter(aes(color = major_category), alpha = 0.4)+
+  labs(x = NULL, y = NULL, title = ""Yearly Female Earnings per Occupation"")+
+  theme(legend.position = ""none"")+
+  theme_algoritma
+
+# add interactivity
+ggplotly(plot1, tooltip = ""text"")"
