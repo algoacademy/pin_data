@@ -104,7 +104,7 @@ server <- function(input, output) {
         #data aggregasi
         
         workers_gap <- workers_clean %>% 
-            filter( year == 2016) %>% 
+            filter( year == input$select_year) %>% 
             mutate( percent_male = 100 - percent_female) %>% 
             group_by(major_category) %>% 
             summarise( Male = mean(percent_male),
