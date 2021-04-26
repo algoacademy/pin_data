@@ -1,5 +1,12 @@
 "text"
-"# This will be the code from the instructor
-library(shiny)
-df <- iris
-iris_species <- iris$Species"
+"header <- dashboardHeader(title = ""Gender Gap Analysis"")
+
+sidebar <- dashboardSidebar(
+    sidebarMenu(menuItem(text = ""Overview"",
+                         tabName = ""overview"",
+                         icon = icon(""dashboard"")),
+                menuItem(text = ""Source Data"",
+                         tabName = ""sourcedata"",
+                         icon = icon(""table""))
+                )
+                            )"
