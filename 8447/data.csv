@@ -1,5 +1,71 @@
 "text"
-"# This will be the code from the instructor
+"# prep library
 library(shiny)
-df <- iris
-iris_species <- iris$Species"
+library(tidyverse)
+library(ggpubr)
+library(scales)
+library(glue)
+library(plotly)
+library(shinydashboard)
+library(DT)
+
+# read data
+workers <- read.csv(""data_input/jobs_gender.csv"")
+
+# read theme
+
+theme_algoritma <- readRDS(""theme_algoritma.rds"")
+
+# cleaning data
+workers_clean <- workers %>% 
+    drop_na(total_earnings_male, total_earnings_female) %>% 
+    select(-wage_percent_of_male)
+
+
+# header ------------------------------------------------------------------
+
+    
+header <-  dashboardHeader(title = ""Gender Gap Analysis"")
+
+# sidebar -----------------------------------------------------------------
+
+    
+sidebar <- dashboardSidebar(
+        sidebarMenu(
+            menuItem(""Overview"", 
+                     tabName = ""overview"", 
+                     icon = icon(""dashboard"")),
+            menuItem(""Source Data"", 
+                     icon = icon(""table""),
+                     tabName = ""table""
+                    )
+        )
+    )
+
+# body --------------------------------------------------------------------
+
+
+body <- dashboardBody(
+        tabItems(
+            tabItem(tabName = ""overview"",
+                    h2(""US Labor Force Participation Data"")),
+            tabItem(tabName = ""table"")
+        )
+    )
+
+
+ui <- dashboardPage( title = ""My Dashboard"",
+               skin = ""red"",
+               header = header,
+               sidebar = sidebar,
+               body = body
+)
+
+
+server <- function(input, output) {
+
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+"
