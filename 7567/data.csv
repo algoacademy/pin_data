@@ -136,6 +136,28 @@ server <- function(input, output) {
     
     output$scatter_plot <- renderPlotly({
         
+        # filter data
+        data_scatter <- workers_clean %>% 
+                        filter(year == input$select_year)
+        
+        # visualisasi plot
+        plot2 <- ggplot(data_scatter, aes(x = total_earnings_male, y = total_earnings_female))+
+            geom_point(aes(col = major_category,
+                           text = glue(""Major Category: {major_category},
+                              Total earnings male: ${scales::comma(total_earnings_male)},
+                              Total earnings female: ${comma(total_earnings_female)}"")))+
+            geom_smooth()+
+            scale_x_continuous(labels = dollar_format())+
+            scale_y_continuous(labels = dollar_format())+
+            theme(legend.position = ""none"")+
+            labs(title = ""Distribution plot of earnings"",
+                 x = ""Total Earnings Male"",
+                 y = ""Total Earnings Female"")+
+            scale_color_brewer(palette = ""Set3"")+
+            theme_algoritma
+        
+        #interaktif plot
+        ggplotly(plot2, tooltip = ""text"")
         
     }) 
     
