@@ -116,8 +116,18 @@ server <- function(input, output) {
         
         #visualisasi data
         
-        #interaktif plot
+        plot3 <- ggplot(data = workers_gap,mapping = aes(x = value,y = major_category, text = text))+
+            geom_col(aes(fill = name))+
+            geom_vline(xintercept = 50, linetype = ""dotted"")+
+            labs(x = NULL,
+                 y = NULL,
+                 title = ""US Labor Force Participation in 2016"")+
+            theme(legend.position = ""none"")+
+            scale_x_continuous(labels = unit_format(unit = ""%""))+
+            theme_algoritma
         
+        #interaktif plot
+        ggplotly(plot3, tooltip = ""text"")
         
     })
 
