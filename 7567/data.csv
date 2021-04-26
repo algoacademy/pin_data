@@ -50,15 +50,21 @@ body <- dashboardBody(
             tabItem(tabName = ""overview"",
                     h2(""US Labor Force Participation Data""),
                     fluidRow(
-                        valueBox(value = mean(workers_clean$total_earnings),
+                        valueBox(value = comma(mean(workers_clean$total_earnings),  
+                                               big.mark = ""."", 
+                                               decimal.mark = "",""),
                                  subtitle = ""Mean Earnings"",
                                  icon = icon(""address-card""),
                                  color = ""red""),
-                        valueBox(value = sum(workers_clean$workers_male),
+                        valueBox(value = comma(sum(workers_clean$workers_male),
+                                               big.mark = ""."", 
+                                               decimal.mark = "",""),
                                  subtitle = ""Total Workers Male"",
                                  icon = icon(""male""),
                                  color = ""red""),
-                        valueBox(value = sum(workers_clean$workers_female),
+                        valueBox(value = comma(sum(workers_clean$workers_female),
+                                               big.mark = ""."", 
+                                               decimal.mark = "",""),
                                  subtitle = ""Total Workers Female"",
                                  icon = icon(""female""),
                                  color= ""red"")
@@ -83,7 +89,7 @@ body <- dashboardBody(
                     ),
             tabItem(tabName = ""table"",
                     fluidRow(
-                        DT::dataTableOutput(""workersDT"")
+                        dataTableOutput(""workersDT"")
                     ))
         )
     )
