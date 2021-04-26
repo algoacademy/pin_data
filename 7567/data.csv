@@ -96,6 +96,39 @@ ui <- dashboardPage( title = ""My Dashboard"",
 
 server <- function(input, output) {
 
+# output gender plot ------------------------------------------------------
+
+
+    output$gender_plot <- renderPlotly({
+        
+        #data aggregasi
+        
+        workers_gap <- workers_clean %>% 
+            filter( year == 2016) %>% 
+            mutate( percent_male = 100 - percent_female) %>% 
+            group_by(major_category) %>% 
+            summarise( Male = mean(percent_male),
+                       Female = mean(percent_female)) %>% 
+            ungroup() %>% 
+            mutate(major_category = reorder(major_category, Male-Female)) %>% 
+            pivot_longer(cols = -major_category) %>% 
+            mutate(text = glue('{name}: {round(value,2)} %'))
+        
+        #visualisasi data
+        
+        #interaktif plot
+        
+        
+    })
+
+# output scatter plot -----------------------------------------------------
+
+    
+    output$scatter_plot <- renderPlotly({
+        
+        
+    }) 
+    
 }
 
 # Run the application 
