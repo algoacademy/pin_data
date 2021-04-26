@@ -83,7 +83,7 @@ body <- dashboardBody(
                     ),
             tabItem(tabName = ""table"",
                     fluidRow(
-                        dataTableOutput(""workersDT"")
+                        DT::dataTableOutput(""workersDT"")
                     ))
         )
     )
@@ -163,6 +163,13 @@ server <- function(input, output) {
         ggplotly(plot2, tooltip = ""text"")
         
     }) 
+    
+
+# output table ------------------------------------------------------------
+
+  output$workersDT <- renderDataTable({
+      datatable(data = workers_clean, options = list(pageLength = 5))
+  })    
     
 }
 
