@@ -81,7 +81,10 @@ body <- dashboardBody(
                     
                     
                     ),
-            tabItem(tabName = ""table"")
+            tabItem(tabName = ""table"",
+                    fluidRow(
+                        dataTableOutput(""workersDT"")
+                    ))
         )
     )
 
