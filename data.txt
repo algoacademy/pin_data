@@ -153,3 +153,8 @@
   rows: 1
   cols: 1
   type: table
+- path: '4268'
+  name: '4268'
+  rows: 1
+  cols: 1
+  type: table
