@@ -1,2 +1,12 @@
 "text"
-""
+"header <- dashboardHeader(title = ""Gender Gap Analysis"")
+
+sidebar <- dashboardSidebar(
+    sidebarMenu(menuItem(text = ""Overview"",
+                         tabName = ""overview"",
+                         icon = icon(""dashboard"")),
+                menuItem(text = ""Source Data"",
+                         tabName = ""sourcedata"",
+                         icon = icon(""table""))
+                )
+                            )"
