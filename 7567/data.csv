@@ -71,7 +71,16 @@ body <- dashboardBody(
                             choices = unique(workers_clean$year)
                     ))
                     
-                    )),
+                    ),
+                    fluidRow(
+                        column(width = 7,
+                               plotlyOutput(outputId = ""gender_plot"")),
+                        column(width = 5,
+                               plotlyOutput(outputId = ""scatter_plot""))
+                    )
+                    
+                    
+                    ),
             tabItem(tabName = ""table"")
         )
     )
