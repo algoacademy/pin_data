@@ -178,3 +178,8 @@
   rows: 1
   cols: 1
   type: table
+- path: '3473'
+  name: '3473'
+  rows: 1
+  cols: 1
+  type: table
