@@ -253,3 +253,8 @@
   rows: 1
   cols: 1
   type: table
+- path: '2005'
+  name: '2005'
+  rows: 1
+  cols: 1
+  type: table
