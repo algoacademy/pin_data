@@ -248,3 +248,8 @@
   rows: 1
   cols: 1
   type: table
+- path: '6512'
+  name: '6512'
+  rows: 1
+  cols: 1
+  type: table
