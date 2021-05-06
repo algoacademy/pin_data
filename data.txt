@@ -288,3 +288,8 @@
   rows: 1
   cols: 1
   type: table
+- path: '6021'
+  name: '6021'
+  rows: 1
+  cols: 1
+  type: table
