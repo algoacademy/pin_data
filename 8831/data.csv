@@ -1,0 +1,6 @@
+"text"
+"# This will be the code from the instructor
+# comment will not be highlighted
+library(shiny)
+df <- iris
+iris_species <- iris$Species"
