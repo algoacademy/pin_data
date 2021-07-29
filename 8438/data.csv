@@ -52,4 +52,41 @@
     
     
 }
+
+
+# ui.R
+
+header <- dashboardHeader(title = ""Gender Gap Analysis"")
+
+sidebar <- dashboardSidebar(
+    sidebarMenu(
+        menuItem(text = ""Gap Earnings"", tabName = ""gap""),
+        menuItem(text = ""Distribution Plot"", tabName = ""dist""),
+        menuItem(text = ""Data"", tabName = ""dat""),
+        selectInput(inputId = ""tahun"", 
+                    label = ""Choose Year:"", 
+                    choices = unique(workers_clean$year))
+    ))
+
+body <- dashboardBody(
+    tabItems(
+        tabItem(tabName = ""gap"", plotlyOutput(""plot_ranking"")),
+        tabItem(tabName = ""dist"",
+                radioButtons(inputId = ""corrid"",
+                             label = ""Choose Numerical Variable"",
+                             choiceNames  = str_to_title(str_replace_all(names(select_if(workers_clean[,-1], 
+                                                                                         is.numeric)),""_"","" "")),
+                             choiceValues = names(select_if(workers_clean[,-1], is.numeric))
+                ), 
+                plotlyOutput(""corr_plot"")),
+        
+        tabItem(tabName = ""dat"")
+    ))
+
+
+dashboardPage(
+    header = header,
+    body = body,
+    sidebar = sidebar)
+
 "
