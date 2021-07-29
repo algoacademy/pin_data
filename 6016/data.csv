@@ -1,94 +1,88 @@
 "text"
 "
-shinyServer(function(input, output) {
-
-# Tampilan scatter plot
-output$room_scatter <- renderPlotly({
+shinyUI(
     
-# buat plot dengan ggplot
-scatter_plot <- df_airbnb %>% 
-    ggplot(aes(x = review_scores_rating, y = price
-               )) + 
-    geom_point(
-        aes(color = number_of_reviews, # gradasi warna sesuai jumlah review
-            text = popup)  # mengatur tooltip yang keluar ketika kita mengarahkan cursor ke scatterplot
-        ) +
-    geom_smooth(method = ""lm"") +
-    labs(x = ""Review Scores Rating"",
-         y = ""Price"") +
-    scale_y_continuous(labels = dollar_format()) +
-    theme_pander()
-
-# ubah menjadi interactive dengan plotly
-ggplotly(scatter_plot, tooltip = ""text"") %>% 
-        config(displayModeBar = F)
-    
-})
-
-# Tampilan top 10 room price
-output$top_room_price <- renderPlotly({
-    
-# Persiapan data
-df_top_price <- df_airbnb %>% 
-    filter(room_type == input$room_type,
-           price >= input$price_range[1] , # price > min
-           price <= input$price_range[2] # price <= max
-           ) %>% 
-    arrange(desc(price)) %>% 
-    head(10) 
+dashboardPage(
   
-# buat plot dengan ggplot
-df_bar <- df_top_price %>% 
-    ggplot(aes(reorder(id, price), y=price))+
-    geom_col(aes(fill=price, text=popup))+
-    coord_flip()+
-    scale_fill_gradient(high=""darkred"", low=""orange"")+
-    scale_y_continuous(labels = dollar_format())+
-    labs(title = ""Top 10 Most Expensive Hotel Room"",
-         subtitle = ""with price range of $100,00 to $1,000.00"",
-         y = ""Price Range"",
-         x = ""Host ID"",
-         caption = ""Source: df_airbnb"")+
-    theme_minimal()+
-    theme(legend.position = ""None"")
-
-# ubah menjadi interactive dengan plotly
-ggplotly(df_bar, tooltip=""text"") %>% 
-    hide_colorbar()  
-})
-
-# Tampilan top 10 number of review
-output$top_room_review <- renderPlotly({
+  # Header
+  dashboardHeader(title = ""Airbnb Listing"" ),
+  
+  # Side bar untuk menu
+  dashboardSidebar(
     
-# Persiapan data
-df_top_review <- df_airbnb %>% 
-    filter(room_type == input$room_type, 
-           price >= input$price_range[1],
-           price <= input$price_range[2]
-           ) %>% 
-    arrange(desc(number_of_reviews)) %>% 
-    head(10)
+    sidebarMenu(
+      
+      menuItem(text = ""Overview"", icon = icon(""home""), tabName = ""menu_overview""),
+      menuItem(text = ""Room Listing"", icon = icon(""bed""), tabName = ""menu_room""), 
+      menuItem(text = ""Data"", icon = icon(""table""), tabName = ""menu_data"")
+      
+    )
     
-# buat plot dengan ggplot
-df_bar <- df_top_review %>% 
-    ggplot(aes(reorder(id, number_of_reviews), y= number_of_reviews))+
-    geom_col(aes(fill= number_of_reviews, text=popup))+
-    coord_flip()+
-    scale_fill_gradient(high=""darkred"", low=""orange"")+        
-    scale_y_continuous(labels = number_format(big.mark = "",""))+
-    labs(title = ""Top 10 with Most Number of Reviews"",
-         subtitle = ""with price range of $0 to $1,000.00"",
-         y = ""Number of Review"",
-         x = ""Host ID"",
-         caption = ""Source: df_airbnb"")+
-    theme_minimal()+
-    theme(legend.position = ""None"")
-
-# ubah menjadi interactive dengan plotly
-ggplotly(df_bar, tooltip=""text"") %>% 
-    hide_colorbar()
+  ),
+  
+  # Body untuk content
+  dashboardBody(
     
-})
-
-})
+    tabItems(
+      
+      # Menu Overview
+      tabItem(tabName = ""menu_overview""),
+      
+      # Menu Room
+      tabItem(align = ""center"", tabName = ""menu_room"",
+              
+              # Konten untuk menu Room
+              h2(""Room Listing""),
+              
+              # Plot Scatter
+              plotlyOutput(""room_scatter""),
+              
+              h2(""Top 10 Room Listing""),
+              
+              # Input
+              fluidRow(
+                
+                column(width = 6,
+                  selectInput(inputId = ""room_type"",
+                              label = ""Select Room Type"",
+                              choices = unique(df_airbnb$room_type)
+                              )
+                       ),
+                column(width = 6,
+                  sliderInput(inputId = ""price_range"",
+                              label = ""Select Price Range"", 
+                              min = min(df_airbnb$price),
+                              max = max(df_airbnb$price),
+                              value = c( min(df_airbnb$price), mean(df_airbnb$price) ) 
+                  )
+                       )
+                
+              ), 
+              
+              
+              fluidRow(
+                
+                # Bar Chart Top Price  
+                column(width = 6,
+                       plotlyOutput(""top_room_price"")
+                       ),
+                
+                # Bar Chart Number of Review
+                column(width = 6,
+                       plotlyOutput(""top_room_review"")
+                       )
+              )
+              
+              ),
+      
+      # Menu Data
+      tabItem(tabName = ""menu_data"")
+      
+    )
+    
+  )
+  
+)
+    
+)
 "
