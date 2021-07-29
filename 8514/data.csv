@@ -8,7 +8,17 @@ dashboardPage(
   dashboardHeader(title = ""Airbnb Listing"" ),
   
   # Side bar untuk menu
-  dashboardSidebar( ),
+  dashboardSidebar(
+    
+    sidebarMenu(
+      
+      menuItem(text = ""Overview""),
+      menuItem(text = ""Room Listing""),
+      menuItem(text = ""Data"")
+      
+    )
+    
+  ),
   
   # Body untuk content
   dashboardBody( )
