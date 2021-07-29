@@ -50,7 +50,10 @@ dashboardPage(
                           min = min(df_airbnb$price),
                           max = max(df_airbnb$price),
                           value = c(min(df_airbnb$price), mean(df_airbnb$price))
-                          )
+                          ),
+              
+              # Bar Chart
+              plotlyOutput(""top_room_price"")
               
               ),
       
