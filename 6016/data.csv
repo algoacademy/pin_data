@@ -39,7 +39,7 @@ dashboardPage(
               
               h2(""Top 10 Room Listing""),
               
-              # Input
+              # Input, total lebar column = 12
               fluidRow(
                 
                 column(width = 6,
