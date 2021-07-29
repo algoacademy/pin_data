@@ -56,6 +56,39 @@ df_bar <- df_top_price %>%
 ggplotly(df_bar, tooltip=""text"") %>% 
     hide_colorbar()  
 })
+
+# Tampilan top 10 number of review
+output$top_room_review <- renderPlotly({
     
+    # Persiapan data
+    df_top_review <- df_airbnb %>% 
+        filter(room_type == input$room_type, 
+               price >= input$price_range[1],
+               price <= input$price_range[2]
+        ) %>% 
+        arrange(desc(number_of_reviews)) %>% 
+        head(10)
+    
+    # buat plot dengan ggplot
+    df_bar <- df_top_review %>% 
+        ggplot(aes(reorder(id, number_of_reviews), y= number_of_reviews))+
+        geom_col(aes(fill= number_of_reviews, text=popup))+
+        coord_flip()+
+        scale_fill_gradient(high=""darkred"", low=""orange"")+
+        scale_y_continuous(labels = dollar_format())+
+        labs(title = ""Top 10 with Most Number of Reviews"",
+             subtitle = ""with price range of $0 to $1,000.00"",
+             y = ""Number of Review"",
+             x = ""Host ID"",
+             caption = ""Source: df_airbnb"")+
+        theme_minimal()+
+        theme(legend.position = ""None"")
+    
+    # ubah menjadi interactive dengan plotly
+    ggplotly(df_bar, tooltip=""text"") %>% 
+        hide_colorbar()
+    
+})
+
 })
 "
