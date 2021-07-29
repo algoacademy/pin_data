@@ -12,16 +12,20 @@ dashboardPage(
     
     sidebarMenu(
       
-      menuItem(text = ""Overview"", icon = icon(""home"")),
-      menuItem(text = ""Room Listing"", icon = icon(""bed"")), 
-      menuItem(text = ""Data"", icon = icon(""table""))
+      menuItem(text = ""Overview"", icon = icon(""home""), tabName = ""menu_overview""),
+      menuItem(text = ""Room Listing"", icon = icon(""bed""), tabName = ""menu_room""), 
+      menuItem(text = ""Data"", icon = icon(""table""), tabName = ""menu_data"")
       
     )
     
   ),
   
   # Body untuk content
-  dashboardBody( )
+  dashboardBody(
+    
+    
+    
+  )
   
 )
     
