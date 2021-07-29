@@ -1,34 +1,59 @@
 "text"
-"header <- dashboardHeader(title = ""Gender Gap Analysis"")
-
-sidebar <- dashboardSidebar(
-    sidebarMenu(
-        menuItem(text = ""Gap Earnings"", tabName = ""gap""),
-        menuItem(text = ""Distribution Plot"", tabName = ""dist""),
-        menuItem(text = ""Data"", tabName = ""dat""),
-        selectInput(inputId = ""tahun"", 
-                    label = ""Choose Year:"", 
-                    choices = unique(workers_clean$year))
-    ))
-
-body <- dashboardBody(
-    tabItems(
-        tabItem(tabName = ""gap"", plotlyOutput(""plot_ranking"")),
-        tabItem(tabName = ""dist"",
-                radioButtons(inputId = ""corrid"",
-                             label = ""Choose Numerical Variable"",
-                             choiceNames  = str_to_title(str_replace_all(names(select_if(workers_clean[,-1], 
-                                                                                         is.numeric)),""_"","" "")),
-                             choiceValues = names(select_if(workers_clean[,-1], is.numeric))
-                ), 
-                plotlyOutput(""corr_plot"")),
+"function(input,output){
+    
+    output$plot_ranking <- renderPlotly({
+        data_vis1 <- workers_clean %>% 
+            mutate(gap_earnings = total_earnings_male-total_earnings_female) %>% 
+            filter(year == input$tahun) %>% 
+            group_by(major_category) %>% 
+            summarise(gap_earnings = mean(gap_earnings))
         
-        tabItem(tabName = ""dat"", dataTableOutput(outputId = ""dataset""))
-    ))
-
-
-dashboardPage(
-    header = header,
-    body = body,
-    sidebar = sidebar)
+        plot <- data_vis1 %>% 
+            ggplot(aes(x = gap_earnings, 
+                       y = reorder(major_category, gap_earnings),
+                       text = glue(""{major_category}
+                         Gap Earnings: {round(gap_earnings,2)}""))) +
+            geom_col(fill = ""dodgerblue4"") +
+            geom_col(data = filter(data_vis1, major_category == ""Computer, Engineering, and Science""), fill = ""firebrick"") +
+            labs( x = NULL,
+                  y = NULL,
+                  title = glue(""Gap Earnings on Male and Female {input$tahun}"")) +
+            scale_y_discrete(labels = wrap_format(30)) +
+            scale_x_continuous(labels = dollar_format(prefix = ""$"")) +
+            theme_algoritma
+        
+        ggplotly(plot, tooltip = ""text"")
+    })
+    
+    
+    output$corr_plot <- renderPlotly({
+        
+        plot_dist <- workers_clean %>% 
+            ggplot(aes(x = total_earnings_male, 
+                       y = workers_clean[,input$corrid])) + 
+            geom_jitter(aes(col = major_category ,
+                            text = glue(""{str_to_upper(major_category)}
+                         Earnings Male: {total_earnings_male}
+                         Earnings Female: {total_earnings_female}"")
+            )) +
+            geom_smooth() +
+            labs(y = glue(""{input$corrid}""),
+                 x = ""Total Earnings Male"",
+                 title = ""Distribution of Plot Earnings"") +
+            scale_color_brewer(palette = ""Set3"") +
+            theme_algoritma +
+            theme(legend.position = ""none"")
+        
+        ggplotly(plot_dist, tooltip = ""text"")
+        
+        
+        
+    })
+    
+    output$dataset <- renderDataTable({
+        datatable(workers_clean, options = list(scrollX = T))
+    })
+    
+    
+}
 "
