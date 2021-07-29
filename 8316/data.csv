@@ -26,13 +26,17 @@ dashboardPage(
     tabItems(
       
       # Menu Overview
-      tabItem(),
+      tabItem(tabName = ""menu_overview""),
       
       # Menu Room
-      tabItem(),
+      tabItem(align = ""center"", tabName = ""menu_room"",
+              
+              # Konten untuk menu Room
+              h2(""Room Listing"")
+              ),
       
       # Menu Data
-      tabItem()
+      tabItem(tabName = ""menu_data"")
       
     )
     
