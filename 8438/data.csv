@@ -1,5 +1,16 @@
 "text"
-"# ui.R
+"header <- dashboardHeader(title = ""Gender Gap Analysis"")
+
+sidebar <- dashboardSidebar(
+    sidebarMenu(
+        menuItem(text = ""Gap Earnings"", tabName = ""gap""),
+        menuItem(text = ""Distribution Plot"", tabName = ""dist""),
+        menuItem(text = ""Data"", tabName = ""dat""),
+        selectInput(inputId = ""tahun"", 
+                    label = ""Choose Year:"", 
+                    choices = unique(workers_clean$year))
+    ))
+
 body <- dashboardBody(
     tabItems(
         tabItem(tabName = ""gap"", plotlyOutput(""plot_ranking"")),
@@ -15,8 +26,9 @@ body <- dashboardBody(
         tabItem(tabName = ""dat"", dataTableOutput(outputId = ""dataset""))
     ))
 
-# server.R
 
- output$dataset <- renderDataTable({
-        datatable(workers_clean, options = list(scrollX = T))
-    })"
+dashboardPage(
+    header = header,
+    body = body,
+    sidebar = sidebar)
+"
