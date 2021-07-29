@@ -1,52 +1,30 @@
 "text"
 "
-shinyUI(
+shinyServer(function(input, output) {
+
+# Tampilan scatter plot
+output$room_scatter <- renderPlotly({
     
-dashboardPage(
-  
-  # Header
-  dashboardHeader(title = ""Airbnb Listing"" ),
-  
-  # Side bar untuk menu
-  dashboardSidebar(
+# buat plot dengan ggplot
+scatter_plot <- df_airbnb %>% 
+    ggplot(aes(x = review_scores_rating, y = price
+               )) + 
+    geom_point(
+        aes(color = number_of_reviews, # gradasi warna sesuai jumlah review
+            text = popup)  # mengatur tooltip yang keluar ketika kita mengarahkan cursor ke scatterplot
+        ) +
+    geom_smooth(method = ""lm"") +
+    labs(x = ""Review Scores Rating"",
+         y = ""Price"") +
+    scale_y_continuous(labels = dollar_format()) +
+    theme_pander()
+# ubah menjadi interactive dengan plotly
+ggplotly(scatter_plot, tooltip = ""text"") %>% 
+        config(displayModeBar = F)
     
-    sidebarMenu(
-      
-      menuItem(text = ""Overview"", icon = icon(""home""), tabName = ""menu_overview""),
-      menuItem(text = ""Room Listing"", icon = icon(""bed""), tabName = ""menu_room""), 
-      menuItem(text = ""Data"", icon = icon(""table""), tabName = ""menu_data"")
-      
-    )
+})
+
+
     
-  ),
-  
-  # Body untuk content
-  dashboardBody(
-    
-    tabItems(
-      
-      # Menu Overview
-      tabItem(tabName = ""menu_overview""),
-      
-      # Menu Room
-      tabItem(align = ""center"", tabName = ""menu_room"",
-              
-              # Konten untuk menu Room
-              h2(""Room Listing""),
-              
-              # Plot Scatter
-              plotlyOutput(""room_scatter"")
-              
-              ),
-      
-      # Menu Data
-      tabItem(tabName = ""menu_data"")
-      
-    )
-    
-  )
-  
-)
-    
-)
+})
 "
