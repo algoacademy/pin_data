@@ -23,7 +23,18 @@ dashboardPage(
   # Body untuk content
   dashboardBody(
     
-    
+    tabItems(
+      
+      # Menu Overview
+      tabItem(),
+      
+      # Menu Room
+      tabItem(),
+      
+      # Menu Data
+      tabItem()
+      
+    )
     
   )
   
