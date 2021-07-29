@@ -49,7 +49,7 @@ dashboardPage(
                           label = ""Select Price Range"", 
                           min = min(df_airbnb$price),
                           max = max(df_airbnb$price),
-                          value = min(df_airbnb$price)
+                          value = c(min(df_airbnb$price), mean(df_airbnb$price))
                           )
               
               ),
