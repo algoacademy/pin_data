@@ -32,7 +32,11 @@ dashboardPage(
       tabItem(align = ""center"", tabName = ""menu_room"",
               
               # Konten untuk menu Room
-              h2(""Room Listing"")
+              h2(""Room Listing""),
+              
+              # Plot Scatter
+              plotlyOutput(""room_scatter"")
+              
               ),
       
       # Menu Data
