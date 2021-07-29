@@ -1,6 +1,29 @@
 "text"
-"# This will be the code from the instructor
-# comment will not be highlighted
-library(shiny)
-df <- iris
-iris_species <- iris$Species"
+"
+shinyUI(
+    
+dashboardPage(
+  
+  # Header
+  dashboardHeader(title = ""Airbnb Listing"" ),
+  
+  # Side bar untuk menu
+  dashboardSidebar(
+    
+    sidebarMenu(
+      
+      menuItem(text = ""Overview"", icon = icon(""home"")),
+      menuItem(text = ""Room Listing"", icon = icon(""bed"")), 
+      menuItem(text = ""Data"", icon = icon(""table""))
+      
+    )
+    
+  ),
+  
+  # Body untuk content
+  dashboardBody( )
+  
+)
+    
+)
+"
