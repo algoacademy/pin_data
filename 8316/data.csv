@@ -43,6 +43,13 @@ dashboardPage(
               selectInput(inputId = ""room_type"",
                           label = ""Select Room Type"",
                           choices = unique(df_airbnb$room_type)
+                          ),
+              
+              sliderInput(inputId = ""price_range"",
+                          label = ""Select Price Range"", 
+                          min = min(df_airbnb$price),
+                          max = max(df_airbnb$price),
+                          value = min(df_airbnb$price)
                           )
               
               ),
