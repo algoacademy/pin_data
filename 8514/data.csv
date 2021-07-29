@@ -12,9 +12,9 @@ dashboardPage(
     
     sidebarMenu(
       
-      menuItem(text = ""Overview""),
-      menuItem(text = ""Room Listing""),
-      menuItem(text = ""Data"")
+      menuItem(text = ""Overview"", icon = icon(""home"")),
+      menuItem(text = ""Room Listing"", icon = icon(""bed"")), 
+      menuItem(text = ""Data"", icon = icon(""table""))
       
     )
     
