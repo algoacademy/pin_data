@@ -343,3 +343,8 @@
   rows: 1
   cols: 1
   type: table
+- path: '2463'
+  name: '2463'
+  rows: 1
+  cols: 1
+  type: table
