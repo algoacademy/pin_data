@@ -1,6 +1,91 @@
 "text"
-"# This will be the code from the instructor
-# comment will not be highlighted
+"
 library(shiny)
-df <- iris
-iris_species <- iris$Species"
+
+
+shinyUI(
+    
+dashboardPage(
+  
+  # Header
+  dashboardHeader(title = ""Airbnb Listing""),
+  
+  # Sidebar untuk menu
+  dashboardSidebar(
+    
+    sidebarMenu(
+      
+      menuItem(text = ""Overview"", icon = icon(""home""),tabName = ""menu_overview""),
+      menuItem(text = ""Room Listing"", icon = icon(""bed""),tabName = ""menu_room""),
+      menuItem(text = ""Data"", icon = icon(""table""), tabName = ""menu_data"")
+      
+    )
+    
+  ),
+  
+  # Body untuk content
+  dashboardBody(
+    
+    tabItems(
+      
+      # Menu Overview
+      tabItem(tabName = ""menu_overview""),
+      
+      # Menu Room
+      tabItem(align = ""center"", tabName = ""menu_room"",
+              
+              # Kontek untuk menu Room
+              h2(""Room Listing""),
+              
+              # Plot Scatter
+              plotlyOutput(""room_scatter""),
+              
+              h2(""Top 10 Room Listing""),
+              
+              # Input
+              # Input, total lebar column = 12
+              fluidRow(
+                
+                column(width = 6,
+                       selectInput(inputId = ""room_type"",
+                                   label = ""Select Room Type"",
+                                   choices = unique(df_airbnb$room_type)
+                       )
+                ),
+                column(width = 6,
+                       sliderInput(inputId = ""price_range"",
+                                   label = ""Select Price Range"", 
+                                   min = min(df_airbnb$price),
+                                   max = max(df_airbnb$price),
+                                   value = c( min(df_airbnb$price), mean(df_airbnb$price) ) 
+                       )
+                )
+                
+              ), 
+              
+              
+              fluidRow(
+                
+                # Bar Chart Top Price  
+                column(width = 6,
+                       plotlyOutput(""top_room_price"")
+                ),
+                
+                # Bar Chart Number of Review
+                column(width = 6,
+                       plotlyOutput(""top_room_review"")
+                )
+              )
+              
+      ),
+      
+      # Menu Data
+      tabItem(tabName = ""menu_data"")
+      
+    )
+    
+  )
+  
+)
+
+)"
