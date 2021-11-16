@@ -1,6 +1,27 @@
 "text"
-"# This will be the code from the instructor
-# comment will not be highlighted
-library(shiny)
-df <- iris
-iris_species <- iris$Species"
+"library(shiny)
+library(shinydashboard)
+library(shinydashboardPlus)
+library(tidyverse)
+library(plotly)
+library(scales)
+library(glue)
+
+data_attrition <- read_csv(file = 'data_input/data-attrition.csv')
+
+cat_var <- data_attrition %>% 
+  select(gender, education, 
+         education_field, 
+         work_life_balance,
+         marital_status) %>% 
+  colnames() %>% 
+  str_replace_all(pattern = ""_"", replacement = "" "") %>% 
+  str_to_title()
+
+num_var <- data_attrition %>% 
+  select(age, distance_from_home, 
+         total_working_years, 
+         num_companies_worked) %>% 
+  colnames() %>% 
+  str_replace_all(pattern = ""_"", replacement = "" "") %>% 
+  str_to_title()"
