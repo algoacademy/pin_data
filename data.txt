@@ -368,3 +368,8 @@
   rows: 1
   cols: 1
   type: table
+- path: '1006'
+  name: '1006'
+  rows: 1
+  cols: 1
+  type: table
